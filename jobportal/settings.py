@@ -275,6 +275,11 @@ STATICFILES_DIRS = [
 
 ]
 
+STATIC_ROOT = (
+    BASE_DIR
+    / "staticfiles"
+)
+
 
 # =========================================================
 # USER-UPLOADED MEDIA FILES
@@ -311,7 +316,7 @@ LOGIN_REDIRECT_URL = (
 
 
 # =========================================================
-# EMAIL
+# EMAIL - RESEND HTTP API
 # =========================================================
 
 RESEND_API_KEY = os.environ.get(
@@ -321,43 +326,26 @@ RESEND_API_KEY = os.environ.get(
 
 if RESEND_API_KEY:
 
-    EMAIL_BACKEND = (
-        "django.core.mail.backends."
-        "smtp.EmailBackend"
-    )
-
-    EMAIL_HOST = (
-        "smtp.resend.com"
-    )
-
-    EMAIL_PORT = 587
-
-    EMAIL_USE_TLS = True
-
-    EMAIL_HOST_USER = (
-        "resend"
-    )
-
-    EMAIL_HOST_PASSWORD = (
-        RESEND_API_KEY
-    )
-
-    EMAIL_TIMEOUT = 20
-
     DEFAULT_FROM_EMAIL = (
         "onboarding@resend.dev"
     )
 
 else:
 
-    EMAIL_BACKEND = (
-        "django.core.mail.backends."
-        "console.EmailBackend"
-    )
-
     DEFAULT_FROM_EMAIL = (
         "noreply@localhost"
     )
+
+
+# Django's normal email backend is not used
+# for Resend. The actual email sending is
+# handled through Resend's HTTPS API in
+# accounts/services.py.
+
+EMAIL_BACKEND = (
+    "django.core.mail.backends.console.EmailBackend"
+)
+
 
 # =========================================================
 # COOKIE / SESSION SECURITY
@@ -373,6 +361,10 @@ CSRF_COOKIE_SAMESITE = (
     "Lax"
 )
 
+
+# =========================================================
+# PRODUCTION SECURITY
+# =========================================================
 
 if not DEBUG:
 
@@ -391,3 +383,28 @@ if not DEBUG:
     )
 
     SECURE_HSTS_PRELOAD = True
+
+
+# =========================================================
+# RENDER
+# =========================================================
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get(
+    "RENDER_EXTERNAL_HOSTNAME",
+)
+
+if RENDER_EXTERNAL_HOSTNAME:
+
+    if RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
+
+        ALLOWED_HOSTS.append(
+            RENDER_EXTERNAL_HOSTNAME
+        )
+
+    CSRF_TRUSTED_ORIGINS = [
+        f"https://{RENDER_EXTERNAL_HOSTNAME}"
+    ]
+
+else:
+
+    CSRF_TRUSTED_ORIGINS = []

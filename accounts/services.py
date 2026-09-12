@@ -2,9 +2,9 @@ import secrets
 import string
 from datetime import timedelta
 
+import resend
 from django.conf import settings
 from django.contrib.auth.hashers import make_password
-from django.core.mail import EmailMessage
 from django.utils import timezone
 
 from .models import PasswordResetOTP
@@ -51,6 +51,31 @@ def create_password_reset_otp(user):
     return otp, code
 
 
+def _send_resend_email(subject, body, recipient):
+    """
+    Send email through Resend's HTTPS API.
+    This avoids Render Free's SMTP port restriction.
+    """
+
+    api_key = settings.RESEND_API_KEY
+
+    if not api_key:
+        raise RuntimeError(
+            "RESEND_API_KEY is not configured."
+        )
+
+    resend.api_key = api_key
+
+    params = {
+        "from": settings.DEFAULT_FROM_EMAIL,
+        "to": [recipient],
+        "subject": subject,
+        "text": body,
+    }
+
+    return resend.Emails.send(params)
+
+
 def send_registration_email(user):
     """
     Send a welcome email to whoever registered.
@@ -63,35 +88,30 @@ def send_registration_email(user):
     else:
         greeting = "Hello,"
 
-    email = EmailMessage(
-        subject="Welcome to Malabon Jobs",
-        body=(
-            f"{greeting}\n\n"
-            "Your Malabon Jobs account has been "
-            "registered successfully.\n\n"
-            f"Registered email: {user.email}\n\n"
-            "You may now use your email address and "
-            "password to log in to Malabon Jobs.\n\n"
-            "If you did not create this account, "
-            "please contact the Malabon Jobs administrator.\n\n"
-            "Thank you,\n"
-            "Malabon Jobs"
-        ),
-        from_email=settings.DEFAULT_FROM_EMAIL,
-
-        # IMPORTANT:
-        # Automatically sends to the user who registered.
-        to=[user.email],
+    body = (
+        f"{greeting}\n\n"
+        "Your Malabon Jobs account has been "
+        "registered successfully.\n\n"
+        f"Registered email: {user.email}\n\n"
+        "You may now use your email address and "
+        "password to log in to Malabon Jobs.\n\n"
+        "If you did not create this account, "
+        "please contact the Malabon Jobs administrator.\n\n"
+        "Thank you,\n"
+        "Malabon Jobs"
     )
 
-    return email.send(
-        fail_silently=False,
+    return _send_resend_email(
+        subject="Welcome to Malabon Jobs",
+        body=body,
+        recipient=user.email,
     )
 
 
 def send_password_reset_otp_email(user, code):
     """
-    Send the 4-digit password-reset code to the user's email.
+    Send the 4-digit password-reset code
+    to the user's email through Resend.
     """
 
     full_name = user.get_full_name().strip()
@@ -101,28 +121,23 @@ def send_password_reset_otp_email(user, code):
     else:
         greeting = "Hello,"
 
-    email = EmailMessage(
-        subject="Malabon Jobs Password Reset Code",
-        body=(
-            f"{greeting}\n\n"
-            "We received a request to reset the password "
-            "for your Malabon Jobs account.\n\n"
-            "Your 4-digit verification code is:\n\n"
-            f"{code}\n\n"
-            f"This code expires in "
-            f"{OTP_EXPIRY_MINUTES} minutes.\n\n"
-            "Do not share this code with anyone.\n\n"
-            "If you did not request a password reset, "
-            "you may safely ignore this email.\n\n"
-            "Thank you,\n"
-            "Malabon Jobs"
-        ),
-        from_email=settings.DEFAULT_FROM_EMAIL,
-
-        # Automatically sends to the user requesting reset.
-        to=[user.email],
+    body = (
+        f"{greeting}\n\n"
+        "We received a request to reset the password "
+        "for your Malabon Jobs account.\n\n"
+        "Your 4-digit verification code is:\n\n"
+        f"{code}\n\n"
+        f"This code expires in "
+        f"{OTP_EXPIRY_MINUTES} minutes.\n\n"
+        "Do not share this code with anyone.\n\n"
+        "If you did not request a password reset, "
+        "you may safely ignore this email.\n\n"
+        "Thank you,\n"
+        "Malabon Jobs"
     )
 
-    return email.send(
-        fail_silently=False,
+    return _send_resend_email(
+        subject="Malabon Jobs Password Reset Code",
+        body=body,
+        recipient=user.email,
     )
