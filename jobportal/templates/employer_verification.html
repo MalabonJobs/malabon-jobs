@@ -1,0 +1,905 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Employer Verification | Malabon Jobs
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/employer_verification.css' %}"
+    >
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="employer-header">
+
+
+        <!-- =================================================
+             MALABON JOBS LOGO
+        ================================================== -->
+
+        <a
+            class="main-logo-link"
+            href="{% url 'accounts:job_seeker_home' %}"
+            aria-label="Malabon Jobs Home"
+        >
+
+            <img
+                class="main-logo"
+                src="{% static 'images/malabonjoblogo.png' %}"
+                alt="Malabon Jobs"
+            >
+
+        </a>
+
+
+        <!-- =================================================
+             PROFILE
+        ================================================== -->
+
+        <div class="header-actions">
+
+            <div class="profile-menu-container">
+
+
+                <!-- =========================================
+                     PROFILE BUTTON
+                ========================================== -->
+
+                <button
+                    id="profileMenuButton"
+                    class="profile-button"
+                    type="button"
+                    aria-label="Open profile menu"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="profileDropdown"
+                >
+
+                    <img
+                        class="profile-icon"
+                        src="{% static 'images/profileicon.png' %}"
+                        alt="Profile"
+                    >
+
+                </button>
+
+
+                <!-- =========================================
+                     PROFILE DROPDOWN
+                ========================================== -->
+
+                <div
+                    id="profileDropdown"
+                    class="profile-dropdown"
+                    hidden
+                >
+
+                    <a
+                        class="profile-dropdown-item"
+                        href="{% url 'profile_page' %}"
+                    >
+                        Profile
+                    </a>
+
+
+                    <form
+                        class="logout-form"
+                        method="post"
+                        action="{% url 'accounts:logout' %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <button
+                            class="profile-dropdown-item logout-button"
+                            type="submit"
+                        >
+                            Log out
+                        </button>
+
+                    </form>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+
+    </header>
+
+
+    <!-- =====================================================
+         EMPLOYER VERIFICATION PAGE
+    ====================================================== -->
+
+    <main class="employer-verification-page">
+
+
+        <!-- =================================================
+             MAIN VERIFICATION CONTAINER
+        ================================================== -->
+
+        <section
+            class="verification-container"
+            aria-labelledby="verificationTitle"
+        >
+
+
+            <!-- =================================================
+                 VERIFICATION FORM
+            ================================================== -->
+
+            <form
+                id="employerVerificationForm"
+                method="post"
+                enctype="multipart/form-data"
+                action="{% url 'accounts:employer_verification' %}"
+            >
+
+                {% csrf_token %}
+
+
+                <!-- =============================================
+                     AUTO UPLOAD ACTION
+                ============================================== -->
+
+                <input
+                    id="verificationAutoAction"
+                    type="hidden"
+                    name="auto_action"
+                    value=""
+                >
+
+
+                <!-- =============================================
+                     TOP CONTENT
+                ============================================== -->
+
+                <div class="verification-header-content">
+
+
+                    <!-- =========================================
+                         SHIELD ICON
+                    ========================================== -->
+
+                    <svg
+                        class="verification-shield"
+                        viewBox="0 0 64 72"
+                        aria-hidden="true"
+                    >
+
+                        <path
+                            d="
+                                M32 3
+                                C39 8 47 10 56 11
+                                V31
+                                C56 48 47 60 32 68
+                                C17 60 8 48 8 31
+                                V11
+                                C17 10 25 8 32 3
+                            "
+                            fill="none"
+                            stroke="#03ABFD"
+                            stroke-width="5"
+                            stroke-linejoin="round"
+                        >
+                        </path>
+
+                        <path
+                            d="M20 35 L28 43 L45 25"
+                            fill="none"
+                            stroke="#03ABFD"
+                            stroke-width="5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                        >
+                        </path>
+
+                    </svg>
+
+
+                    <!-- =========================================
+                         TITLE
+                    ========================================== -->
+
+                    <h1
+                        class="verification-title"
+                        id="verificationTitle"
+                    >
+                        Employer Verification
+                    </h1>
+
+
+                    <!-- =========================================
+                         DESCRIPTION
+                    ========================================== -->
+
+                    <p class="verification-description">
+                        Please submit all the required documents listed below so we can verify<br>
+                        your information and review your application before approving your account.
+                    </p>
+
+
+                    <!-- =========================================
+                         DOCUMENT COUNT
+                    ========================================== -->
+
+                    <p class="document-count">
+                        {{ uploaded_count }} of 5 documents uploaded
+                    </p>
+
+
+                    <!-- =========================================
+                         DJANGO MESSAGES
+                    ========================================== -->
+
+                    {% if messages %}
+
+                        {% for message in messages %}
+
+                            <p
+                                class="verification-description"
+                                role="status"
+                            >
+                                {{ message }}
+                            </p>
+
+                        {% endfor %}
+
+                    {% endif %}
+
+
+                    <!-- =========================================
+                         PROGRESS BAR
+                    ========================================== -->
+
+                    <div
+                        class="progress-bar"
+                        aria-label="Upload progress"
+                    >
+
+                        <div
+                            id="verificationProgressFill"
+                            class="progress-fill"
+                            data-progress="{{ progress_percent }}"
+                        ></div>
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     REQUIREMENTS LIST
+                ================================================== -->
+
+                <div class="requirements-list">
+
+
+                    <!-- =================================================
+                         BUSINESS PERMIT
+                    ================================================== -->
+
+                    <div class="requirement-row">
+
+                        <div class="requirement-left">
+
+                            <img
+                                class="requirement-icon"
+                                src="{% static 'images/requirementslogo.png' %}"
+                                alt=""
+                                aria-hidden="true"
+                            >
+
+                            <div class="requirement-information">
+
+                                <h2 class="requirement-title">
+                                    Business Permit
+                                </h2>
+
+                                <p class="requirement-format">
+                                    PDF, JPG or PNG
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="required-label">
+                            Required
+                        </span>
+
+
+                        <button
+                            class="choose-file-button"
+                            type="button"
+                            data-file-input="businessPermitInput"
+                        >
+
+                            {% if verification.business_permit %}
+
+                                Uploaded
+
+                            {% else %}
+
+                                Choose file
+
+                            {% endif %}
+
+                        </button>
+
+
+                        <input
+                            id="businessPermitInput"
+                            type="file"
+                            name="business_permit"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            hidden
+                        >
+
+                    </div>
+
+
+                    <!-- =================================================
+                         BARANGAY CLEARANCE
+                    ================================================== -->
+
+                    <div class="requirement-row">
+
+                        <div class="requirement-left">
+
+                            <img
+                                class="requirement-icon"
+                                src="{% static 'images/requirementslogo.png' %}"
+                                alt=""
+                                aria-hidden="true"
+                            >
+
+                            <div class="requirement-information">
+
+                                <h2 class="requirement-title">
+                                    Barangay Clearance
+                                </h2>
+
+                                <p class="requirement-format">
+                                    PDF, JPG or PNG
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="required-label">
+                            Required
+                        </span>
+
+
+                        <button
+                            class="choose-file-button"
+                            type="button"
+                            data-file-input="barangayClearanceInput"
+                        >
+
+                            {% if verification.barangay_clearance %}
+
+                                Uploaded
+
+                            {% else %}
+
+                                Choose file
+
+                            {% endif %}
+
+                        </button>
+
+
+                        <input
+                            id="barangayClearanceInput"
+                            type="file"
+                            name="barangay_clearance"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            hidden
+                        >
+
+                    </div>
+
+
+                    <!-- =================================================
+                         MAYOR'S PERMIT
+                    ================================================== -->
+
+                    <div class="requirement-row">
+
+                        <div class="requirement-left">
+
+                            <img
+                                class="requirement-icon"
+                                src="{% static 'images/requirementslogo.png' %}"
+                                alt=""
+                                aria-hidden="true"
+                            >
+
+                            <div class="requirement-information">
+
+                                <h2 class="requirement-title">
+                                    Mayor’s Permit
+                                </h2>
+
+                                <p class="requirement-format">
+                                    PDF, JPG or PNG
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="required-label">
+                            Required
+                        </span>
+
+
+                        <button
+                            class="choose-file-button"
+                            type="button"
+                            data-file-input="mayorsPermitInput"
+                        >
+
+                            {% if verification.mayors_permit %}
+
+                                Uploaded
+
+                            {% else %}
+
+                                Choose file
+
+                            {% endif %}
+
+                        </button>
+
+
+                        <input
+                            id="mayorsPermitInput"
+                            type="file"
+                            name="mayors_permit"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            hidden
+                        >
+
+                    </div>
+
+
+                    <!-- =================================================
+                         CEDULA
+                    ================================================== -->
+
+                    <div class="requirement-row">
+
+                        <div class="requirement-left">
+
+                            <img
+                                class="requirement-icon"
+                                src="{% static 'images/requirementslogo.png' %}"
+                                alt=""
+                                aria-hidden="true"
+                            >
+
+                            <div class="requirement-information">
+
+                                <h2 class="requirement-title">
+                                    Cedula
+                                </h2>
+
+                                <p class="requirement-format">
+                                    PDF, JPG or PNG
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="required-label">
+                            Required
+                        </span>
+
+
+                        <button
+                            class="choose-file-button"
+                            type="button"
+                            data-file-input="cedulaInput"
+                        >
+
+                            {% if verification.cedula %}
+
+                                Uploaded
+
+                            {% else %}
+
+                                Choose file
+
+                            {% endif %}
+
+                        </button>
+
+
+                        <input
+                            id="cedulaInput"
+                            type="file"
+                            name="cedula"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            hidden
+                        >
+
+                    </div>
+
+
+                    <!-- =================================================
+                         VALID ID
+                    ================================================== -->
+
+                    <div class="requirement-row">
+
+                        <div class="requirement-left">
+
+                            <img
+                                class="requirement-icon"
+                                src="{% static 'images/requirementslogo.png' %}"
+                                alt=""
+                                aria-hidden="true"
+                            >
+
+                            <div class="requirement-information">
+
+                                <h2 class="requirement-title">
+                                    Valid ID
+                                </h2>
+
+                                <p class="requirement-format">
+                                    PDF, JPG or PNG
+                                </p>
+
+                            </div>
+
+                        </div>
+
+
+                        <span class="required-label">
+                            Required
+                        </span>
+
+
+                        <button
+                            class="choose-file-button"
+                            type="button"
+                            data-file-input="validIdInput"
+                        >
+
+                            {% if verification.valid_id %}
+
+                                Uploaded
+
+                            {% else %}
+
+                                Choose file
+
+                            {% endif %}
+
+                        </button>
+
+
+                        <input
+                            id="validIdInput"
+                            type="file"
+                            name="valid_id"
+                            accept=".pdf,.jpg,.jpeg,.png"
+                            hidden
+                        >
+
+                    </div>
+
+
+                </div>
+
+
+                <!-- =================================================
+                     BOTTOM SECTION
+                ================================================== -->
+
+                <div class="verification-footer">
+
+
+                    <!-- =============================================
+                         INFORMATION NOTE
+                    ============================================== -->
+
+                    <div class="requirement-note">
+
+                        <span
+                            class="information-icon"
+                            aria-hidden="true"
+                        >
+                            i
+                        </span>
+
+                        <span class="requirement-note-text">
+                            All five documents are required.
+                        </span>
+
+                    </div>
+
+
+                    <!-- =============================================
+                         ACTION BUTTONS
+                    ============================================== -->
+
+                    <div class="verification-actions">
+
+
+                        <!-- SAVE AND CONTINUE LATER -->
+
+                        <button
+                            class="save-later-button"
+                            type="submit"
+                            name="action"
+                            value="save_progress"
+                        >
+                            Save and continue later
+                        </button>
+
+
+                        <!-- SUBMIT FOR VERIFICATION -->
+
+                        <button
+                            class="submit-verification-button"
+                            type="submit"
+                            name="action"
+                            value="submit_for_verification"
+                        >
+                            Submit for Verification
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+
+            </form>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- =====================================================
+         REQUIREMENTS SUBMITTED SUCCESS POPUP
+    ====================================================== -->
+
+    {% if show_submission_success %}
+
+        <div
+            id="submissionSuccessPopup"
+            class="submission-success-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="submissionSuccessTitle"
+        >
+
+
+            <!-- =================================================
+                 SUCCESS CARD
+            ================================================== -->
+
+            <section class="submission-success-card">
+
+
+                <!-- =============================================
+                     SUCCESS CHECK ICON
+                ============================================== -->
+
+                <div
+                    class="submission-success-icon"
+                    aria-hidden="true"
+                >
+
+                    <span class="submission-checkmark"></span>
+
+                </div>
+
+
+                <!-- =============================================
+                     SUCCESS MESSAGE
+                ============================================== -->
+
+                <div class="submission-success-message">
+
+                    <p
+                        id="submissionSuccessTitle"
+                        class="submission-success-title"
+                    >
+                        Requirements submitted successfully!
+                    </p>
+
+                    <p class="submission-success-description">
+                        Please allow us a moment to review it.
+                    </p>
+
+                </div>
+
+
+                <!-- =============================================
+                     CONTINUE BUTTON
+                ============================================== -->
+
+                <button
+                    id="closeSubmissionSuccess"
+                    class="submission-continue-button"
+                    type="button"
+                >
+                    Continue
+                </button>
+
+
+            </section>
+
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- =====================================================
+         EMPLOYER VERIFICATION REVIEW POPUP
+         STATUS COMES FROM THE DJANGO DATABASE
+    ====================================================== -->
+
+    {% if employer_review_popup %}
+
+        <div
+            id="employerReviewPopup"
+            class="submission-success-overlay"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="employerReviewPopupTitle"
+            data-redirect-home="{% if employer_review_popup.redirect_home %}true{% else %}false{% endif %}"
+            data-home-url="{% url 'accounts:job_seeker_home' %}"
+        >
+
+
+            <!-- =================================================
+                 REVIEW STATUS CARD
+                 USES THE SAME EXISTING POPUP CSS
+            ================================================== -->
+
+            <section class="submission-success-card">
+
+
+                <!-- =============================================
+                     SAME EXISTING POPUP ICON
+                ============================================== -->
+
+                <div
+                    class="submission-success-icon"
+                    aria-hidden="true"
+                >
+
+                    {% if employer_review_popup.icon_type == "denied" %}
+
+                        <img
+                            src="{% static 'images/denied.png' %}"
+                            alt=""
+                            style="
+                                width: 120px;
+                                height: 120px;
+                                display: block;
+                                object-fit: contain;
+                            "
+                        >
+
+                    {% else %}
+
+                        <span class="submission-checkmark"></span>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- =============================================
+                     REVIEW STATUS MESSAGE
+                ============================================== -->
+
+                <div class="submission-success-message">
+
+                    <p
+                        id="employerReviewPopupTitle"
+                        class="submission-success-title"
+                    >
+                        {{ employer_review_popup.title }}
+                    </p>
+
+
+                    {% if employer_review_popup.message %}
+
+                        <p class="submission-success-description">
+                            {{ employer_review_popup.message }}
+                        </p>
+
+                    {% endif %}
+
+                </div>
+
+
+                <!-- =============================================
+                     CONTINUE BUTTON
+                ============================================== -->
+
+                <button
+                    id="closeEmployerReviewPopup"
+                    class="submission-continue-button"
+                    type="button"
+                >
+                    Continue
+                </button>
+
+
+            </section>
+
+
+        </div>
+
+    {% endif %}
+
+
+    <!-- =====================================================
+         PROFILE DROPDOWN JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{% static 'js/base.js' %}"
+    ></script>
+
+
+    <!-- =====================================================
+         EMPLOYER VERIFICATION JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{% static 'js/employer_verification.js' %}"
+    ></script>
+
+
+</body>
+
+</html>

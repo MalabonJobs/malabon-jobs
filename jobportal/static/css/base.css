@@ -1,0 +1,810 @@
+:root {
+    --cyan: #03abfd;
+    --cyan-hover: #0298e5;
+
+    --white: #ffffff;
+    --black: #111111;
+
+    --dropdown-border: #707070;
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background: var(--white);
+}
+
+body {
+    min-height: 100vh;
+
+    margin: 0;
+
+    overflow-x: hidden;
+
+    background: var(--white);
+    color: var(--black);
+
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+a,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.main-header {
+    position: relative;
+
+    width: 100%;
+    height: 160px;
+
+    background: var(--white);
+
+    z-index: 1000;
+}
+
+
+/* =========================================================
+   MALABON JOBS LOGO
+========================================================= */
+
+.main-logo-link {
+    position: absolute;
+
+    top: 34px;
+    left: 43px;
+
+    width: 65px;
+    height: 65px;
+
+    display: block;
+
+    text-decoration: none;
+}
+
+.main-logo {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    transition: transform 0.18s ease;
+}
+
+.main-logo-link:hover .main-logo {
+    transform: scale(1.03);
+}
+
+
+/* =========================================================
+   DESKTOP NAVIGATION
+========================================================= */
+
+.main-navigation {
+    position: absolute;
+
+    top: 62px;
+    left: 50%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 150px;
+
+    transform: translateX(-50%);
+}
+
+.navigation-link {
+    margin: 0;
+    padding: 0;
+
+    color: var(--cyan);
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    text-decoration: none;
+    white-space: nowrap;
+
+    transition:
+        color 0.18s ease,
+        transform 0.18s ease;
+}
+
+.navigation-link:hover {
+    color: var(--cyan-hover);
+
+    transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   MOBILE NAVIGATION
+   HIDDEN ON DESKTOP
+========================================================= */
+
+.mobile-nav-container {
+    display: none;
+}
+
+.mobile-navigation-dropdown[hidden] {
+    display: none !important;
+}
+
+
+/* =========================================================
+   RIGHT HEADER ACTIONS
+========================================================= */
+
+.header-actions {
+    position: absolute;
+
+    top: 40px;
+    right: 65px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 65px;
+}
+
+
+/* =========================================================
+   NOTIFICATION BUTTON
+========================================================= */
+
+.notification-button {
+    width: 52px;
+    height: 52px;
+
+    margin: 0;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+
+    background: transparent;
+
+    border: 0;
+    border-radius: 0;
+
+    outline: none;
+    box-shadow: none;
+}
+
+.notification-icon {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    transition: transform 0.18s ease;
+}
+
+.notification-button:hover .notification-icon {
+    transform: scale(1.06);
+}
+
+.notification-button:focus,
+.notification-button:focus-visible,
+.notification-button:active {
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-menu-container {
+    position: relative;
+
+    width: 56px;
+    height: 56px;
+
+    z-index: 100;
+}
+
+.profile-button {
+    width: 56px;
+    height: 56px;
+
+    margin: 0;
+    padding: 0;
+
+    display: block;
+
+    overflow: hidden;
+
+    background: transparent;
+
+    border: 0;
+    border-radius: 0;
+
+    outline: none;
+    box-shadow: none;
+}
+
+.profile-icon {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    transition: transform 0.18s ease;
+}
+
+.profile-button:hover .profile-icon {
+    transform: scale(1.05);
+}
+
+.profile-button:focus,
+.profile-button:focus-visible,
+.profile-button:active {
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   PROFILE DROPDOWN
+========================================================= */
+
+.profile-dropdown[hidden] {
+    display: none !important;
+}
+
+.profile-dropdown {
+    position: absolute;
+
+    top: 58px;
+    right: 0;
+
+    width: 120px;
+
+    overflow: hidden;
+
+    background: var(--white);
+
+    border: 1px solid var(--dropdown-border);
+
+    z-index: 9999;
+}
+
+.profile-dropdown-item {
+    width: 100%;
+    height: 42px;
+
+    margin: 0;
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+
+    background: var(--white);
+    color: var(--black);
+
+    border: 0;
+    border-radius: 0;
+
+    outline: none;
+    box-shadow: none;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+
+    text-align: left;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease;
+}
+
+.profile-dropdown-item:hover,
+.profile-dropdown-item:focus,
+.profile-dropdown-item:focus-visible {
+    background: var(--cyan-hover);
+    color: var(--white);
+
+    outline: none;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-form {
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+.logout-button {
+    border-top: 1px solid #dddddd;
+}
+
+
+/* =========================================================
+   PAGE CONTENT
+========================================================= */
+
+.page-content {
+    width: 100%;
+    min-height: calc(100vh - 160px);
+
+    margin: 0;
+    padding: 0;
+
+    background: var(--white);
+}
+
+
+/* =========================================================
+   SMALLER DESKTOP
+========================================================= */
+
+@media (max-width: 1700px) {
+
+    .main-logo-link {
+        left: 30px;
+    }
+
+    .main-navigation {
+        left: 50%;
+
+        gap: 105px;
+
+        transform: translateX(-50%);
+    }
+
+    .header-actions {
+        right: 45px;
+
+        gap: 50px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .main-header {
+        height: 120px;
+    }
+
+    .main-logo-link {
+        top: 25px;
+        left: 20px;
+
+        width: 55px;
+        height: 55px;
+    }
+
+    .main-navigation {
+        top: 48px;
+        left: 50%;
+
+        gap: 65px;
+
+        transform: translateX(-50%);
+    }
+
+    .navigation-link {
+        font-size: 14px;
+    }
+
+    .header-actions {
+        top: 31px;
+        right: 20px;
+
+        gap: 25px;
+    }
+
+    .notification-button {
+        width: 41px;
+        height: 41px;
+    }
+
+    .profile-menu-container {
+        width: 43px;
+        height: 43px;
+    }
+
+    .profile-button {
+        width: 43px;
+        height: 43px;
+    }
+
+    .profile-dropdown {
+        top: 46px;
+
+        width: 120px;
+    }
+
+    .page-content {
+        min-height: calc(100vh - 120px);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .main-header {
+        height: 130px;
+    }
+
+
+    /* =====================================================
+       LOGO
+    ====================================================== */
+
+    .main-logo-link {
+        top: 18px;
+        left: 12px;
+
+        width: 48px;
+        height: 48px;
+    }
+
+
+    /* =====================================================
+       HIDE DESKTOP NAVIGATION
+    ====================================================== */
+
+    .main-navigation {
+        display: none;
+    }
+
+
+    /* =====================================================
+       RIGHT HEADER ACTIONS
+    ====================================================== */
+
+    .header-actions {
+        top: 21px;
+        right: 12px;
+
+        gap: 10px;
+    }
+
+    .notification-button {
+        width: 34px;
+        height: 34px;
+    }
+
+    .profile-menu-container {
+        width: 38px;
+        height: 38px;
+    }
+
+    .profile-button {
+        width: 38px;
+        height: 38px;
+    }
+
+
+    /* =====================================================
+       PROFILE DROPDOWN
+    ====================================================== */
+
+    .profile-dropdown {
+        top: 42px;
+        right: 0;
+
+        width: 120px;
+    }
+
+
+    /* =====================================================
+       BURGER CONTAINER
+       DIRECTLY UNDER PROFILE ICON
+    ====================================================== */
+
+    .mobile-nav-container {
+        position: absolute;
+
+        top: 65px;
+        right: 12px;
+        left: auto;
+
+        width: 38px;
+        height: 38px;
+
+        display: block;
+
+        transform: none;
+
+        z-index: 5000;
+    }
+
+
+    /* =====================================================
+       BURGER BUTTON
+    ====================================================== */
+
+    .mobile-menu-button {
+        width: 38px;
+        height: 38px;
+
+        margin: 0;
+        padding: 5px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        gap: 5px;
+
+        background: transparent;
+
+        border: 0;
+        border-radius: 0;
+
+        outline: none;
+        box-shadow: none;
+
+        cursor: pointer;
+    }
+
+
+    /* =====================================================
+       BURGER LINES
+    ====================================================== */
+
+    .burger-line {
+        width: 25px;
+        height: 3px;
+
+        display: block;
+
+        background: #03abfd;
+
+        border-radius: 1px;
+
+        transition:
+            transform 0.18s ease,
+            opacity 0.18s ease;
+    }
+
+
+    /* =====================================================
+       BURGER OPEN ANIMATION
+    ====================================================== */
+
+    .mobile-menu-button.menu-open .burger-line:nth-child(1) {
+        transform:
+            translateY(8px)
+            rotate(45deg);
+    }
+
+    .mobile-menu-button.menu-open .burger-line:nth-child(2) {
+        opacity: 0;
+    }
+
+    .mobile-menu-button.menu-open .burger-line:nth-child(3) {
+        transform:
+            translateY(-8px)
+            rotate(-45deg);
+    }
+
+
+    /* =====================================================
+       MOBILE NAVIGATION DROPDOWN
+    ====================================================== */
+
+    .mobile-navigation-dropdown {
+        position: absolute;
+
+        top: 43px;
+        right: 0;
+        left: auto;
+
+        width: 130px;
+
+        display: flex;
+        flex-direction: column;
+
+        overflow: hidden;
+
+        background: var(--white);
+
+        border: 1px solid var(--dropdown-border);
+
+        transform: none;
+
+        z-index: 9999;
+    }
+
+
+    /* =====================================================
+       MOBILE NAVIGATION LINKS
+    ====================================================== */
+
+    .mobile-navigation-link {
+        width: 100%;
+        height: 42px;
+
+        margin: 0;
+        padding: 0 14px;
+
+        display: flex;
+        align-items: center;
+
+        color: #03abfd;
+        background: var(--white);
+
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+
+        text-decoration: none;
+
+        border-bottom: 1px solid #eeeeee;
+
+        transition:
+            background 0.18s ease,
+            color 0.18s ease;
+    }
+
+    .mobile-navigation-link:last-child {
+        border-bottom: 0;
+    }
+
+    .mobile-navigation-link:hover,
+    .mobile-navigation-link:focus,
+    .mobile-navigation-link:focus-visible {
+        background: #f5fbff;
+        color: #03abfd;
+
+        outline: none;
+    }
+
+
+    /* =====================================================
+       PAGE CONTENT
+    ====================================================== */
+
+    .page-content {
+        min-height: calc(100vh - 130px);
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .main-logo-link {
+        top: 18px;
+        left: 8px;
+
+        width: 44px;
+        height: 44px;
+    }
+
+    .header-actions {
+        top: 21px;
+        right: 8px;
+
+        gap: 6px;
+    }
+
+    .notification-button {
+        width: 31px;
+        height: 31px;
+    }
+
+    .profile-menu-container {
+        width: 34px;
+        height: 34px;
+    }
+
+    .profile-button {
+        width: 34px;
+        height: 34px;
+    }
+
+    .profile-dropdown {
+        top: 38px;
+        right: 0;
+
+        width: 115px;
+    }
+
+
+    /* =====================================================
+       BURGER UNDER PROFILE
+    ====================================================== */
+
+    .mobile-nav-container {
+        top: 59px;
+        right: 8px;
+
+        width: 34px;
+        height: 34px;
+    }
+
+    .mobile-menu-button {
+        width: 34px;
+        height: 34px;
+
+        padding: 4px;
+
+        gap: 4px;
+    }
+
+    .burger-line {
+        width: 23px;
+        height: 3px;
+    }
+
+    .mobile-navigation-dropdown {
+        top: 39px;
+        right: 0;
+
+        width: 125px;
+    }
+
+}

@@ -1,0 +1,1 @@
+# Authentication event logging is handled in views.py.

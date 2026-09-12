@@ -1,0 +1,279 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {% block title %}
+        Malabon Jobs
+        {% endblock %}
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/base.css' %}"
+    >
+
+    {% block extra_css %}
+    {% endblock %}
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="main-header">
+
+
+        <!-- =================================================
+             MALABON JOBS LOGO
+        ================================================== -->
+
+        <a
+            class="main-logo-link"
+            href="{% url 'accounts:job_seeker_home' %}"
+            aria-label="Malabon Jobs Home"
+        >
+
+            <img
+                class="main-logo"
+                src="{% static 'images/malabonjoblogo.png' %}"
+                alt="Malabon Jobs"
+            >
+
+        </a>
+
+
+        <!-- =================================================
+             DESKTOP NAVIGATION
+        ================================================== -->
+
+        <nav
+            class="main-navigation"
+            aria-label="Main navigation"
+        >
+
+            <a
+                class="navigation-link"
+                href="{% url 'accounts:job_seeker_home' %}"
+            >
+                HOME
+            </a>
+
+            <a
+                class="navigation-link"
+                href="{% url 'jobs_page' %}"
+            >
+                JOBS
+            </a>
+
+            <a
+                class="navigation-link"
+                href="{% url 'analytics_page' %}"
+            >
+                ANALYTICS
+            </a>
+
+        </nav>
+
+
+        <!-- =================================================
+             MOBILE BURGER NAVIGATION
+        ================================================== -->
+
+        <div class="mobile-nav-container">
+
+
+            <!-- BURGER BUTTON -->
+
+            <button
+                id="mobileMenuButton"
+                class="mobile-menu-button"
+                type="button"
+                aria-label="Open navigation menu"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-controls="mobileNavigationDropdown"
+            >
+
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+                <span class="burger-line"></span>
+
+            </button>
+
+
+            <!-- MOBILE DROPDOWN -->
+
+            <nav
+                id="mobileNavigationDropdown"
+                class="mobile-navigation-dropdown"
+                aria-label="Mobile navigation"
+                hidden
+            >
+
+                <a
+                    class="mobile-navigation-link"
+                    href="{% url 'accounts:job_seeker_home' %}"
+                >
+                    HOME
+                </a>
+
+                <a
+                    class="mobile-navigation-link"
+                    href="{% url 'jobs_page' %}"
+                >
+                    JOBS
+                </a>
+
+                <a
+                    class="mobile-navigation-link"
+                    href="{% url 'analytics_page' %}"
+                >
+                    ANALYTICS
+                </a>
+
+            </nav>
+
+
+        </div>
+
+
+        <!-- =================================================
+             RIGHT HEADER ACTIONS
+        ================================================== -->
+
+        <div class="header-actions">
+
+
+            <!-- =============================================
+                 NOTIFICATION
+            ============================================== -->
+
+            <button
+                class="notification-button"
+                type="button"
+                aria-label="Notifications"
+            >
+
+                <img
+                    class="notification-icon"
+                    src="{% static 'images/notificationicon.png' %}"
+                    alt="Notifications"
+                >
+
+            </button>
+
+
+            <!-- =============================================
+                 PROFILE
+            ============================================== -->
+
+            <div class="profile-menu-container">
+
+                <button
+                    id="profileMenuButton"
+                    class="profile-button"
+                    type="button"
+                    aria-label="Open profile menu"
+                    aria-haspopup="true"
+                    aria-expanded="false"
+                    aria-controls="profileDropdown"
+                >
+
+                    <img
+                        class="profile-icon"
+                        src="{% static 'images/profileicon.png' %}"
+                        alt="Profile"
+                    >
+
+                </button>
+
+
+                <!-- =========================================
+                     PROFILE DROPDOWN
+                ========================================== -->
+
+                <div
+                    id="profileDropdown"
+                    class="profile-dropdown"
+                    hidden
+                >
+
+                    <a
+                        class="profile-dropdown-item"
+                        href="{% url 'profile_page' %}"
+                    >
+                        Profile
+                    </a>
+
+                    <form
+                        class="logout-form"
+                        method="post"
+                        action="{% url 'accounts:logout' %}"
+                    >
+
+                        {% csrf_token %}
+
+                        <button
+                            class="profile-dropdown-item logout-button"
+                            type="submit"
+                        >
+                            Log out
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+    <!-- =====================================================
+         PAGE CONTENT
+    ====================================================== -->
+
+    <main class="page-content">
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{% static 'js/base.js' %}"
+    ></script>
+
+
+    {% block extra_js %}
+    {% endblock %}
+
+
+</body>
+
+</html>

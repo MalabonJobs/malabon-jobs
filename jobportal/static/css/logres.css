@@ -1,0 +1,714 @@
+:root {
+    --cyan: #03abfd;
+    --cyan-hover: #0298e5;
+    --white: #ffffff;
+    --black: #111111;
+    --border: #4f4f4f;
+    --input-border: #707070;
+    --link-blue: #03abfd;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    background: var(--white);
+    color: var(--black);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button,
+a {
+    cursor: pointer;
+}
+
+.page-container {
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+}
+
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.account-container {
+    position: relative;
+
+    width: 820px;
+    height: 560px;
+
+    overflow: hidden;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+}
+
+
+/* =========================
+   FORM PANELS
+========================= */
+
+.form-container {
+    position: absolute;
+
+    top: 0;
+
+    width: 53%;
+    height: 100%;
+
+    background: var(--white);
+
+    transition:
+        opacity 0.45s ease,
+        transform 0.75s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.login-container {
+    left: 0;
+    z-index: 2;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.register-container {
+    right: 0;
+    z-index: 1;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    opacity: 0;
+    pointer-events: none;
+
+    transform: translateX(70px);
+}
+
+
+/* =========================
+   FORMS
+========================= */
+
+.account-form {
+    width: 325px;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.login-form {
+    transform: translateY(-16px);
+}
+
+.register-form {
+    transform: translateY(-5px);
+}
+
+.account-form h1 {
+    margin: 0 0 20px;
+
+    color: var(--black);
+
+    font-size: 29px;
+    font-weight: 700;
+    line-height: 1.1;
+
+    text-align: center;
+}
+
+
+/* =========================
+   INPUTS
+========================= */
+
+.account-form input {
+    width: 100%;
+    height: 48px;
+
+    padding: 0 14px;
+
+    background: var(--white);
+    color: var(--black);
+
+    border: 1px solid var(--input-border);
+    border-radius: 0;
+    outline: none;
+
+    font-size: 16px;
+}
+
+.login-form input {
+    margin-bottom: 16px;
+}
+
+.login-form input:last-of-type {
+    margin-bottom: 0;
+}
+
+.register-form input + input {
+    margin-top: 16px;
+}
+
+.account-form input::placeholder {
+    color: #343434;
+    opacity: 1;
+}
+
+.account-form input:focus {
+    border-color: var(--cyan);
+    outline: 1px solid var(--cyan);
+}
+
+
+/* =========================
+   BACKEND MESSAGE
+========================= */
+
+.backend-message {
+    margin: 0 0 12px;
+
+    color: #b00020;
+
+    font-size: 12px;
+    line-height: 1.3;
+
+    text-align: center;
+}
+
+
+/* =========================
+   FORGOT PASSWORD
+========================= */
+
+.forgot-password {
+    width: fit-content;
+
+    margin-top: 10px;
+
+    color: var(--link-blue);
+
+    font-size: 13px;
+    font-weight: 400;
+
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+
+/* =========================
+   FORM BUTTON
+========================= */
+
+.primary-button {
+    width: 100%;
+    height: 48px;
+
+    margin-top: 18px;
+    padding: 0;
+
+    background: var(--cyan);
+    color: var(--white);
+
+    border: 1px solid var(--border);
+    border-radius: 0;
+
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.primary-button:hover {
+    background: var(--cyan-hover);
+}
+
+
+/* =========================
+   REGISTER FORM
+========================= */
+
+.register-form h1 {
+    margin-bottom: 20px;
+    font-size: 27px;
+}
+
+.register-form input {
+    height: 43px;
+}
+
+.register-form input + input {
+    margin-top: 16px;
+}
+
+.register-submit {
+    height: 45px;
+    margin-top: 16px;
+}
+
+
+/* =========================
+   MOVING OVERLAY
+========================= */
+
+.overlay-container {
+    position: absolute;
+    z-index: 10;
+
+    top: 0;
+    left: 53%;
+
+    width: 47%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: var(--cyan);
+
+    border-left: 1px solid var(--border);
+
+    transition:
+        transform 0.75s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.overlay {
+    position: relative;
+
+    left: -100%;
+
+    width: 200%;
+    height: 100%;
+
+    background: var(--cyan);
+
+    transition:
+        transform 0.75s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.overlay-panel {
+    position: absolute;
+
+    top: 0;
+
+    width: 50%;
+    height: 100%;
+
+    overflow: hidden;
+
+    background: var(--cyan);
+    color: var(--white);
+}
+
+.overlay-left {
+    left: 0;
+
+    transform: translateX(-20%);
+
+    transition:
+        transform 0.75s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+.overlay-right {
+    right: 0;
+
+    transform: translateX(0);
+
+    transition:
+        transform 0.75s cubic-bezier(0.77, 0, 0.18, 1);
+}
+
+
+/* =========================
+   LOGO
+========================= */
+
+.brand-logo {
+    position: absolute;
+
+    top: 165px;
+    left: 50%;
+
+    width: 250px;
+    max-width: 72%;
+    height: auto;
+
+    display: block;
+
+    object-fit: contain;
+
+    transform: translateX(-50%);
+}
+
+
+/* =========================
+   OVERLAY TEXT
+========================= */
+
+.overlay-action {
+    position: absolute;
+
+    top: 315px;
+    left: 0;
+
+    width: 100%;
+
+    padding: 0 25px;
+
+    text-align: center;
+}
+
+.overlay-action p {
+    margin: 0;
+
+    color: var(--white);
+
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+/* =========================
+   OUTLINE BUTTON
+========================= */
+
+.outline-button {
+    width: 158px;
+    height: 48px;
+
+    margin-top: 13px;
+    padding: 0;
+
+    background: transparent;
+    color: var(--white);
+
+    border: 1px solid var(--white);
+    border-radius: 0;
+
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.outline-button:hover {
+    background: var(--white);
+    color: var(--cyan);
+}
+
+
+/* =========================
+   REGISTRATION MODE
+========================= */
+
+.account-container.register-active .overlay-container {
+    transform: translateX(-112.8%);
+
+    border-left: 0;
+    border-right: 1px solid var(--border);
+}
+
+.account-container.register-active .overlay {
+    transform: translateX(50%);
+}
+
+.account-container.register-active .overlay-left {
+    transform: translateX(0);
+}
+
+.account-container.register-active .overlay-right {
+    transform: translateX(20%);
+}
+
+.account-container.register-active .login-container {
+    opacity: 0;
+    pointer-events: none;
+
+    transform: translateX(-70px);
+}
+
+.account-container.register-active .register-container {
+    z-index: 5;
+
+    opacity: 1;
+    pointer-events: auto;
+
+    transform: translateX(0);
+}
+
+
+/* =========================================================
+   REGISTRATION RESULT POPUP
+========================================================= */
+
+.registration-success-overlay[hidden] {
+    display: none !important;
+}
+
+.registration-success-overlay {
+    position: fixed;
+    z-index: 9999;
+
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+}
+
+.registration-success-card {
+    width: 390px;
+    height: 326px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: #ffffff;
+
+    border: 1px solid #707070;
+    border-radius: 0;
+
+    box-shadow: none;
+}
+
+.registration-success-icon {
+    position: relative;
+
+    width: 112px;
+    height: 112px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cyan);
+
+    border-radius: 50%;
+}
+
+.registration-checkmark {
+    position: relative;
+
+    width: 46px;
+    height: 25px;
+
+    border-left: 8px solid #ffffff;
+    border-bottom: 8px solid #ffffff;
+
+    transform:
+        translateY(-5px)
+        rotate(-45deg);
+}
+
+.registration-xmark {
+    position: relative;
+
+    width: 48px;
+    height: 48px;
+}
+
+.registration-xmark::before,
+.registration-xmark::after {
+    content: "";
+
+    position: absolute;
+    top: 50%;
+    left: 50%;
+
+    width: 58px;
+    height: 8px;
+
+    background: #ffffff;
+}
+
+.registration-xmark::before {
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.registration-xmark::after {
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.registration-success-text {
+    margin: 24px 0 0;
+
+    color: #111111;
+
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.25;
+
+    text-align: center;
+}
+
+.registration-continue-button {
+    width: 158px;
+    height: 47px;
+
+    margin-top: 27px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cyan);
+    color: var(--white);
+
+    border: 1px solid var(--border);
+    border-radius: 0;
+
+    outline: none;
+    box-shadow: none;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    cursor: pointer;
+
+    transition: background 0.15s ease;
+}
+
+.registration-continue-button:hover {
+    background: var(--cyan-hover);
+}
+
+.registration-continue-button:focus,
+.registration-continue-button:focus-visible,
+.registration-continue-button:active {
+    border: 1px solid var(--border);
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 880px) {
+
+    .account-container {
+        width: min(820px, 94vw);
+    }
+
+    .account-form {
+        width: min(
+            325px,
+            calc(100% - 50px)
+        );
+    }
+
+    .brand-logo {
+        width: 68%;
+        max-width: 250px;
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .page-container {
+        padding: 15px;
+    }
+
+    .account-container {
+        width: min(430px, 100%);
+        height: 720px;
+    }
+
+    .form-container {
+        top: 250px;
+        left: 0;
+
+        width: 100%;
+        height: 470px;
+    }
+
+    .login-container,
+    .register-container {
+        right: auto;
+    }
+
+    .account-form {
+        width: calc(100% - 50px);
+        max-width: 335px;
+    }
+
+    .login-form,
+    .register-form {
+        transform: none;
+    }
+
+    .overlay-container {
+        top: 0;
+        left: 0;
+
+        width: 100%;
+        height: 250px;
+
+        border-left: 0;
+        border-bottom: 1px solid var(--border);
+
+        transform: none;
+    }
+
+    .account-container.register-active .overlay-container {
+        transform: none;
+
+        border-right: 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .brand-logo {
+        top: 35px;
+
+        width: 220px;
+        max-width: 62%;
+    }
+
+    .overlay-action {
+        top: 145px;
+    }
+
+    .outline-button {
+        width: 145px;
+        height: 43px;
+
+        margin-top: 9px;
+    }
+
+    .registration-success-card {
+        width: min(390px, calc(100% - 30px));
+        height: 326px;
+    }
+
+}

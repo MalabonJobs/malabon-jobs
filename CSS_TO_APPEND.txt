@@ -1,0 +1,23 @@
+Append this small block to:
+- jobportal/static/css/logres.css
+- jobportal/static/css/forgot_password.css
+- jobportal/static/css/verification_code.css
+- jobportal/static/css/reset_password.css
+
+.backend-message {
+    width: 100%;
+    margin: 0 0 8px;
+    color: #b00020;
+    font-size: 12px;
+    line-height: 1.2;
+    text-align: center;
+}
+
+Also append this only to verification_code.css because Resend Code is now a button:
+
+.resend-code {
+    padding: 0;
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+}

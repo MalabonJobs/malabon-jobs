@@ -1,0 +1,1381 @@
+:root {
+    --cyan: #03abfd;
+    --cyan-hover: #0298e5;
+
+    --white: #ffffff;
+    --black: #111111;
+
+    --text-dark: #111111;
+
+    --container-border: #707070;
+
+    --row-border: #d5d5d5;
+
+    --progress-background: #eeeeee;
+
+    --required-background: #dff3ff;
+
+    --dropdown-border: #707070;
+}
+
+
+/* =========================================================
+   GLOBAL
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    background: var(--white);
+}
+
+body {
+    min-height: 100vh;
+
+    margin: 0;
+
+    background: var(--white);
+    color: var(--black);
+
+    border-top: 2px solid #222222;
+
+    font-family: Arial, Helvetica, sans-serif;
+
+    overflow-x: hidden;
+}
+
+button,
+a {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.employer-header {
+    position: relative;
+
+    width: 100%;
+    height: 145px;
+
+    margin: 0;
+    padding: 0;
+
+    background: var(--white);
+
+    z-index: 10000;
+}
+
+
+/* =========================================================
+   MALABON JOBS LOGO
+========================================================= */
+
+.main-logo-link {
+    position: absolute;
+
+    top: 34px;
+    left: 43px;
+
+    width: 65px;
+    height: 65px;
+
+    display: block;
+
+    text-decoration: none;
+}
+
+.main-logo {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    transition: transform 0.18s ease;
+}
+
+.main-logo-link:hover .main-logo {
+    transform: scale(1.03);
+}
+
+
+/* =========================================================
+   RIGHT HEADER ACTIONS
+========================================================= */
+
+.header-actions {
+    position: absolute;
+
+    top: 40px;
+    right: 65px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 65px;
+
+    z-index: 10001;
+}
+
+
+/* =========================================================
+   PROFILE
+========================================================= */
+
+.profile-menu-container {
+    position: relative;
+
+    width: 56px;
+    height: 56px;
+
+    z-index: 10002;
+}
+
+.profile-button {
+    width: 56px;
+    height: 56px;
+
+    margin: 0;
+    padding: 0;
+
+    display: block;
+
+    overflow: hidden;
+
+    background: transparent;
+
+    border: 0;
+    border-radius: 0;
+
+    outline: none;
+    box-shadow: none;
+}
+
+.profile-icon {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: contain;
+
+    pointer-events: none;
+
+    transition: transform 0.18s ease;
+}
+
+.profile-button:hover .profile-icon {
+    transform: scale(1.05);
+}
+
+.profile-button:focus,
+.profile-button:focus-visible,
+.profile-button:active {
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   PROFILE DROPDOWN
+========================================================= */
+
+.profile-dropdown[hidden] {
+    display: none !important;
+}
+
+.profile-dropdown {
+    position: absolute;
+
+    top: 58px;
+    right: 0;
+
+    width: 120px;
+
+    overflow: hidden;
+
+    background: var(--white);
+
+    border: 1px solid var(--dropdown-border);
+
+    z-index: 99999;
+}
+
+.profile-dropdown-item {
+    width: 100%;
+    height: 42px;
+
+    margin: 0;
+    padding: 0 14px;
+
+    display: flex;
+    align-items: center;
+
+    background: var(--white);
+    color: var(--black);
+
+    border: 0;
+    border-radius: 0;
+
+    outline: none;
+    box-shadow: none;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+
+    text-align: left;
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease;
+}
+
+.profile-dropdown-item:hover,
+.profile-dropdown-item:focus,
+.profile-dropdown-item:focus-visible {
+    background: var(--cyan-hover);
+    color: var(--white);
+
+    outline: none;
+}
+
+
+/* =========================================================
+   LOGOUT
+========================================================= */
+
+.logout-form {
+    width: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+.logout-button {
+    border-top: 1px solid #dddddd;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.employer-verification-page {
+    width: 100%;
+
+    margin: 0;
+    padding: 0 0 26px;
+
+    display: flex;
+    justify-content: center;
+
+    background: var(--white);
+}
+
+
+/* =========================================================
+   MAIN VERIFICATION CONTAINER
+========================================================= */
+
+.verification-container {
+    position: relative;
+
+    width: min(
+        1508px,
+        calc(100% - 370px)
+    );
+
+    min-height: 905px;
+
+    margin: 0 auto;
+
+    padding:
+        16px
+        59px
+        22px;
+
+    background: var(--white);
+
+    border: 1px solid var(--container-border);
+
+    border-radius: 0;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   TOP CONTENT
+========================================================= */
+
+.verification-header-content {
+    width: 100%;
+
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   SHIELD ICON
+========================================================= */
+
+.verification-shield {
+    width: 58px;
+    height: 65px;
+
+    margin:
+        0
+        0
+        7px;
+
+    display: block;
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.verification-title {
+    margin:
+        0
+        0
+        8px;
+
+    padding: 0;
+
+    color: var(--text-dark);
+
+    font-size: 29px;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.verification-description {
+    margin: 0;
+
+    padding: 0;
+
+    color: #222222;
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.45;
+}
+
+
+/* =========================================================
+   DOCUMENT COUNT
+========================================================= */
+
+.document-count {
+    margin:
+        23px
+        0
+        14px;
+
+    padding: 0;
+
+    color: var(--text-dark);
+
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.progress-bar {
+    position: relative;
+
+    width: 490px;
+    height: 16px;
+
+    margin: 0;
+
+    overflow: hidden;
+
+    background: var(--progress-background);
+
+    border: 1px solid #e2e2e2;
+    border-radius: 8px;
+}
+
+.progress-fill {
+    width: 0%;
+    height: 100%;
+
+    background: var(--cyan);
+}
+
+
+/* =========================================================
+   REQUIREMENTS LIST
+========================================================= */
+
+.requirements-list {
+    width: 100%;
+
+    margin-top: 32px;
+
+    display: flex;
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+
+/* =========================================================
+   REQUIREMENT ROW
+========================================================= */
+
+.requirement-row {
+    position: relative;
+
+    width: 100%;
+    height: 87px;
+
+    margin: 0;
+    padding:
+        0
+        31px
+        0
+        24px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(330px, 1fr)
+        150px
+        190px;
+
+    align-items: center;
+
+    column-gap: 22px;
+
+    background: var(--white);
+
+    border: 1px dashed var(--row-border);
+
+    border-radius: 0;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   REQUIREMENT LEFT
+========================================================= */
+
+.requirement-left {
+    min-width: 0;
+
+    display: flex;
+    align-items: center;
+
+    gap: 20px;
+}
+
+
+/* =========================================================
+   REQUIREMENTS LOGO
+========================================================= */
+
+.requirement-icon {
+    width: 51px;
+    height: 51px;
+
+    flex: 0 0 51px;
+
+    display: block;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   REQUIREMENT INFORMATION
+========================================================= */
+
+.requirement-information {
+    min-width: 0;
+
+    margin: 0;
+    padding: 0;
+}
+
+.requirement-title {
+    margin:
+        0
+        0
+        6px;
+
+    padding: 0;
+
+    color: var(--text-dark);
+
+    font-size: 21px;
+    font-weight: 700;
+    line-height: 1.1;
+
+    white-space: nowrap;
+}
+
+.requirement-format {
+    margin: 0;
+    padding: 0;
+
+    color: #222222;
+
+    font-size: 17px;
+    font-weight: 400;
+    line-height: 1.1;
+}
+
+
+/* =========================================================
+   REQUIRED LABEL
+========================================================= */
+
+.required-label {
+    justify-self: start;
+
+    min-width: 68px;
+    height: 25px;
+
+    padding:
+        0
+        10px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--required-background);
+
+    color: var(--cyan);
+
+    font-size: 12px;
+    font-weight: 700;
+    line-height: 1;
+
+    border: 0;
+    border-radius: 0;
+}
+
+
+/* =========================================================
+   CHOOSE FILE BUTTON
+========================================================= */
+
+.choose-file-button {
+    justify-self: end;
+
+    width: 141px;
+    height: 46px;
+
+    margin: 0;
+    padding: 0;
+
+    background: var(--white);
+
+    color: var(--cyan);
+
+    border: 1px solid var(--cyan);
+    border-radius: 0;
+
+    box-shadow: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-align: center;
+
+    outline: none;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease;
+}
+
+
+/* =========================================================
+   CHOOSE FILE HOVER
+========================================================= */
+
+.choose-file-button:hover,
+.choose-file-button:focus,
+.choose-file-button:active {
+    background: var(--cyan);
+
+    color: var(--white);
+
+    border: 1px solid var(--cyan);
+
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.verification-footer {
+    width: 100%;
+
+    margin-top: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 30px;
+}
+
+
+/* =========================================================
+   REQUIREMENT NOTE
+========================================================= */
+
+.requirement-note {
+    display: flex;
+    align-items: center;
+
+    gap: 9px;
+}
+
+.information-icon {
+    width: 18px;
+    height: 18px;
+
+    flex: 0 0 18px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    color: #111111;
+
+    border: 1.5px solid #111111;
+    border-radius: 50%;
+
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    font-style: normal;
+    line-height: 1;
+}
+
+.requirement-note-text {
+    color: #222222;
+
+    font-size: 10px;
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   BOTTOM ACTIONS
+========================================================= */
+
+.verification-actions {
+    display: flex;
+    align-items: center;
+
+    gap: 37px;
+}
+
+
+/* =========================================================
+   SAVE AND CONTINUE LATER
+========================================================= */
+
+.save-later-button {
+    margin: 0;
+    padding: 0;
+
+    background: transparent;
+
+    color: var(--cyan);
+
+    border: 0;
+    border-radius: 0;
+
+    box-shadow: none;
+
+    font-size: 13px;
+    font-weight: 700;
+
+    outline: none;
+}
+
+.save-later-button:hover,
+.save-later-button:focus,
+.save-later-button:active {
+    color: var(--cyan);
+
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   SUBMIT FOR VERIFICATION
+========================================================= */
+
+.submit-verification-button {
+    width: 227px;
+    height: 47px;
+
+    margin: 0;
+    padding: 0;
+
+    background: var(--cyan);
+
+    color: var(--white);
+
+    border: 1px solid var(--cyan);
+    border-radius: 0;
+
+    box-shadow: none;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    text-align: center;
+
+    outline: none;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease;
+}
+
+
+/* =========================================================
+   SUBMIT HOVER
+========================================================= */
+
+.submit-verification-button:hover,
+.submit-verification-button:focus,
+.submit-verification-button:active {
+    background: var(--white);
+
+    color: var(--cyan);
+
+    border: 1px solid var(--cyan);
+
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   SMALLER DESKTOP
+========================================================= */
+
+@media (max-width: 1700px) {
+
+    .main-logo-link {
+        left: 30px;
+    }
+
+    .header-actions {
+        right: 45px;
+    }
+
+    .verification-container {
+        width: calc(100% - 190px);
+
+        padding-left: 55px;
+        padding-right: 55px;
+    }
+
+}
+
+
+/* =========================================================
+   LAPTOP
+========================================================= */
+
+@media (max-width: 1400px) {
+
+    .employer-header {
+        height: 125px;
+    }
+
+    .verification-container {
+        width: calc(100% - 110px);
+
+        min-height: auto;
+
+        padding:
+            20px
+            42px
+            28px;
+    }
+
+    .requirement-row {
+        grid-template-columns:
+            minmax(300px, 1fr)
+            120px
+            160px;
+
+        padding-left: 22px;
+        padding-right: 22px;
+    }
+
+    .requirements-list {
+        gap: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1200px) {
+
+    .employer-header {
+        height: 120px;
+    }
+
+    .main-logo-link {
+        top: 25px;
+        left: 20px;
+
+        width: 55px;
+        height: 55px;
+    }
+
+    .header-actions {
+        top: 31px;
+        right: 20px;
+    }
+
+    .profile-menu-container {
+        width: 43px;
+        height: 43px;
+    }
+
+    .profile-button {
+        width: 43px;
+        height: 43px;
+    }
+
+    .profile-dropdown {
+        top: 46px;
+
+        width: 120px;
+    }
+
+    .verification-container {
+        width: calc(100% - 60px);
+
+        padding:
+            22px
+            30px
+            28px;
+    }
+
+    .requirement-row {
+        grid-template-columns:
+            minmax(260px, 1fr)
+            100px
+            140px;
+
+        column-gap: 14px;
+    }
+
+    .choose-file-button {
+        width: 128px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 800px) {
+
+    .employer-header {
+        height: 90px;
+    }
+
+    .main-logo-link {
+        top: 18px;
+        left: 12px;
+
+        width: 48px;
+        height: 48px;
+    }
+
+    .header-actions {
+        top: 21px;
+        right: 12px;
+    }
+
+    .profile-menu-container {
+        width: 38px;
+        height: 38px;
+    }
+
+    .profile-button {
+        width: 38px;
+        height: 38px;
+    }
+
+    .profile-dropdown {
+        top: 42px;
+        right: 0;
+
+        width: 120px;
+    }
+
+    .employer-verification-page {
+        padding-bottom: 20px;
+    }
+
+    .verification-container {
+        width: calc(100% - 24px);
+
+        padding:
+            22px
+            16px
+            24px;
+    }
+
+    .verification-shield {
+        width: 50px;
+        height: 56px;
+    }
+
+    .verification-title {
+        font-size: 24px;
+    }
+
+    .verification-description {
+        font-size: 11px;
+    }
+
+    .verification-description br {
+        display: none;
+    }
+
+    .document-count {
+        font-size: 15px;
+    }
+
+    .progress-bar {
+        width: min(100%, 420px);
+    }
+
+    .requirement-row {
+        height: auto;
+
+        min-height: 110px;
+
+        padding:
+            16px
+            14px;
+
+        grid-template-columns:
+            1fr
+            auto;
+
+        grid-template-areas:
+            "left required"
+            "button button";
+
+        row-gap: 14px;
+    }
+
+    .requirement-left {
+        grid-area: left;
+    }
+
+    .required-label {
+        grid-area: required;
+
+        justify-self: end;
+    }
+
+    .choose-file-button {
+        grid-area: button;
+
+        justify-self: stretch;
+
+        width: 100%;
+        height: 42px;
+    }
+
+    .requirement-title {
+        font-size: 17px;
+    }
+
+    .requirement-format {
+        font-size: 14px;
+    }
+
+    .requirement-icon {
+        width: 45px;
+        height: 45px;
+
+        flex-basis: 45px;
+    }
+
+    .verification-footer {
+        flex-direction: column;
+        align-items: stretch;
+
+        gap: 20px;
+    }
+
+    .verification-actions {
+        justify-content: flex-end;
+
+        gap: 20px;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 500px) {
+
+    .main-logo-link {
+        top: 18px;
+        left: 8px;
+
+        width: 44px;
+        height: 44px;
+    }
+
+    .header-actions {
+        top: 21px;
+        right: 8px;
+    }
+
+    .profile-menu-container {
+        width: 34px;
+        height: 34px;
+    }
+
+    .profile-button {
+        width: 34px;
+        height: 34px;
+    }
+
+    .profile-dropdown {
+        top: 38px;
+        right: 0;
+
+        width: 115px;
+    }
+
+    .verification-container {
+        width: calc(100% - 16px);
+
+        padding:
+            20px
+            12px;
+    }
+
+    .requirements-list {
+        margin-top: 26px;
+
+        gap: 15px;
+    }
+
+    .requirement-row {
+        grid-template-columns: 1fr;
+
+        grid-template-areas:
+            "left"
+            "required"
+            "button";
+
+        row-gap: 12px;
+    }
+
+    .required-label {
+        justify-self: start;
+    }
+
+    .verification-actions {
+        flex-direction: column;
+
+        gap: 12px;
+    }
+
+    .save-later-button {
+        height: 38px;
+    }
+
+    .submit-verification-button {
+        width: 100%;
+    }
+
+}
+
+/* =========================================================
+   SUBMISSION SUCCESS POPUP OVERLAY
+========================================================= */
+
+.submission-success-overlay {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    padding: 30px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(0, 0, 0, 0.35);
+
+    z-index: 999999;
+}
+
+
+/* =========================================================
+   SUBMISSION SUCCESS CARD
+========================================================= */
+
+.submission-success-card {
+    width: 420px;
+    height: 350px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--white);
+
+    border: 1px solid var(--container-border);
+    border-radius: 0;
+
+    box-shadow: none;
+
+    text-align: center;
+}
+
+
+/* =========================================================
+   SUCCESS ICON
+========================================================= */
+
+.submission-success-icon {
+    position: relative;
+
+    width: 120px;
+    height: 120px;
+
+    flex: 0 0 120px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cyan);
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   CHECKMARK
+========================================================= */
+
+.submission-checkmark {
+    position: relative;
+
+    width: 52px;
+    height: 28px;
+
+    border-left: 10px solid var(--white);
+    border-bottom: 10px solid var(--white);
+
+    transform:
+        translateY(-5px)
+        rotate(-45deg);
+}
+
+
+/* =========================================================
+   SUCCESS MESSAGE
+========================================================= */
+
+.submission-success-message {
+    margin-top: 24px;
+
+    padding: 0 24px;
+
+    text-align: center;
+}
+
+.submission-success-title {
+    margin: 0;
+
+    color: var(--black);
+
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+.submission-success-description {
+    margin:
+        7px
+        0
+        0;
+
+    color: var(--black);
+
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.4;
+}
+
+
+/* =========================================================
+   CONTINUE BUTTON
+========================================================= */
+
+.submission-continue-button {
+    width: 170px;
+    height: 50px;
+
+    margin-top: 28px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cyan);
+    color: var(--white);
+
+    border: 1px solid var(--container-border);
+    border-radius: 0;
+
+    box-shadow: none;
+
+    font-size: 18px;
+    font-weight: 400;
+
+    text-align: center;
+
+    outline: none;
+
+    transition:
+        background 0.2s ease;
+}
+
+.submission-continue-button:hover,
+.submission-continue-button:focus {
+    background: var(--cyan-hover);
+
+    color: var(--white);
+
+    outline: none;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 480px) {
+
+    .submission-success-overlay {
+        padding: 20px;
+    }
+
+    .submission-success-card {
+        width: min(420px, 100%);
+        height: 330px;
+    }
+
+    .submission-success-icon {
+        width: 105px;
+        height: 105px;
+
+        flex-basis: 105px;
+    }
+
+    .submission-checkmark {
+        width: 46px;
+        height: 24px;
+
+        border-left: 9px solid var(--white);
+        border-bottom: 9px solid var(--white);
+    }
+
+    .submission-success-title {
+        font-size: 20px;
+    }
+
+    .submission-success-description {
+        font-size: 13px;
+    }
+
+    .submission-continue-button {
+        width: 160px;
+        height: 48px;
+
+        font-size: 17px;
+    }
+
+}

@@ -1,0 +1,151 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Verification Code — Malabon Ahon</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/verification_code.css' %}"
+    >
+</head>
+
+<body>
+
+    <main class="verification-page">
+
+        <section
+            class="verification-card"
+            aria-label="Verification code"
+        >
+
+            <div class="verification-brand-panel">
+
+                <img
+                    class="verification-brand-logo"
+                    src="{% static 'images/malabon_ahon_white.png' %}"
+                    alt="Malabon Ahon"
+                >
+
+            </div>
+
+            <div class="verification-form-panel">
+
+                <div class="verification-content">
+
+                    <div
+                        class="mail-circle"
+                        aria-hidden="true"
+                    >
+                        <div class="mail-icon"></div>
+                    </div>
+
+                    <p class="verification-message">
+                        Please enter the 4 Digit code<br>
+                        sent to
+                    </p>
+
+                    <p class="verification-email">
+                        {{ email }}
+                    </p>
+
+                    {% if error %}
+                        <p class="backend-message">
+                            {{ error }}
+                        </p>
+                    {% endif %}
+
+                    <form
+                        class="verification-form"
+                        method="post"
+                    >
+                        {% csrf_token %}
+
+                        <div class="code-inputs">
+
+                            <input
+                                class="code-input"
+                                type="text"
+                                name="digit_1"
+                                maxlength="1"
+                                inputmode="numeric"
+                                autocomplete="one-time-code"
+                                pattern="[0-9]"
+                                aria-label="Verification digit 1"
+                                required
+                            >
+
+                            <input
+                                class="code-input"
+                                type="text"
+                                name="digit_2"
+                                maxlength="1"
+                                inputmode="numeric"
+                                pattern="[0-9]"
+                                aria-label="Verification digit 2"
+                                required
+                            >
+
+                            <input
+                                class="code-input"
+                                type="text"
+                                name="digit_3"
+                                maxlength="1"
+                                inputmode="numeric"
+                                pattern="[0-9]"
+                                aria-label="Verification digit 3"
+                                required
+                            >
+
+                            <input
+                                class="code-input"
+                                type="text"
+                                name="digit_4"
+                                maxlength="1"
+                                inputmode="numeric"
+                                pattern="[0-9]"
+                                aria-label="Verification digit 4"
+                                required
+                            >
+
+                        </div>
+
+                        <button
+                            class="resend-code"
+                            type="submit"
+                            name="action"
+                            value="resend"
+                        >
+                            Resend Code
+                        </button>
+
+                        <button
+                            class="verification-send-button"
+                            type="submit"
+                            name="action"
+                            value="verify"
+                        >
+                            Send
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+    <script src="{% static 'js/verification_code.js' %}"></script>
+
+</body>
+</html>

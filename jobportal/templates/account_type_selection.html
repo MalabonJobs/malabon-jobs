@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Choose Account Type — Malabon Ahon
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/account_type_selection.css' %}"
+    >
+</head>
+
+<body>
+
+<main class="selection-page">
+
+    <section
+        class="selection-container"
+        aria-label="Choose account type"
+    >
+
+        <!-- =========================================
+             JOB SEEKER
+        ========================================== -->
+
+        <article class="type-card">
+
+            <img
+                class="account-type-icon"
+                src="{% static 'images/job_seeker_icon.png' %}"
+                alt=""
+                aria-hidden="true"
+            >
+
+            <form
+                method="post"
+                action="{% url 'accounts:account_type_selection' %}"
+            >
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    name="account_type"
+                    value="job_seeker"
+                >
+
+                <button
+                    class="type-button"
+                    type="submit"
+                >
+                    Job Seeker
+                </button>
+
+            </form>
+
+        </article>
+
+
+        <!-- =========================================
+             EMPLOYER
+        ========================================== -->
+
+        <article class="type-card">
+
+            <img
+                class="account-type-icon"
+                src="{% static 'images/employer_icon.png' %}"
+                alt=""
+                aria-hidden="true"
+            >
+
+            <form
+                method="post"
+                action="{% url 'accounts:account_type_selection' %}"
+            >
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    name="account_type"
+                    value="employer"
+                >
+
+                <button
+                    class="type-button"
+                    type="submit"
+                >
+                    Employer
+                </button>
+
+            </form>
+
+        </article>
+
+    </section>
+
+
+    {% if error %}
+        <p class="selection-error">
+            {{ error }}
+        </p>
+    {% endif %}
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,235 @@
+:root {
+    --cyan: #03abfd;
+    --cyan-hover: #0298e5;
+    --white: #ffffff;
+    --black: #111111;
+    --border: #707070;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    background: var(--white);
+    color: var(--black);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.selection-page {
+    position: relative;
+
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+}
+
+
+/* =========================================================
+   TWO CHOICES
+========================================================= */
+
+.selection-container {
+    width: auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 150px;
+}
+
+
+/* =========================================================
+   CARD
+========================================================= */
+
+.type-card {
+    width: 440px;
+    height: 370px;
+
+    flex-shrink: 0;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+    border-radius: 0;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   ICONS
+========================================================= */
+
+.account-type-icon {
+    width: 235px;
+    height: 235px;
+
+    display: block;
+
+    flex-shrink: 0;
+
+    object-fit: contain;
+}
+
+
+/* =========================================================
+   FORM
+========================================================= */
+
+.type-card form {
+    margin: 20px 0 0;
+    padding: 0;
+}
+
+
+/* =========================================================
+   BUTTON
+========================================================= */
+
+.type-button {
+    width: 125px;
+    height: 41px;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cyan);
+    color: var(--white);
+
+    border: 1px solid #4f4f4f;
+    border-radius: 0;
+
+    outline: none;
+    box-shadow: none;
+
+    font-size: 13px;
+    font-weight: 400;
+    line-height: 1;
+
+    text-align: center;
+
+    transition:
+        background 0.15s ease;
+
+    cursor: pointer;
+}
+
+.type-button:hover {
+    background: var(--cyan-hover);
+}
+
+.type-button:focus,
+.type-button:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   ERROR
+========================================================= */
+
+.selection-error {
+    position: absolute;
+
+    left: 50%;
+    bottom: 70px;
+
+    margin: 0;
+
+    color: #b00020;
+
+    font-size: 13px;
+    font-weight: 400;
+
+    text-align: center;
+
+    transform: translateX(-50%);
+}
+
+
+/* =========================================================
+   TABLET / SMALL DESKTOP
+========================================================= */
+
+@media (max-width: 1150px) {
+
+    .selection-container {
+        width: min(1000px, 94vw);
+
+        gap: 80px;
+    }
+
+    .type-card {
+        width: min(440px, 42vw);
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 720px) {
+
+    .selection-page {
+        padding: 30px 15px;
+    }
+
+    .selection-container {
+        width: 100%;
+
+        flex-direction: column;
+
+        gap: 35px;
+    }
+
+    .type-card {
+        width: min(440px, 92vw);
+        height: 370px;
+    }
+
+    .account-type-icon {
+        width: 215px;
+        height: 215px;
+    }
+
+}

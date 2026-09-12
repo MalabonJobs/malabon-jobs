@@ -1,0 +1,324 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Malabon Ahon Account</title>
+
+    <link
+        rel="stylesheet"
+        href="{% static 'css/logres.css' %}"
+    >
+</head>
+
+<body>
+
+<main class="page-container">
+
+    <section
+        class="account-container"
+        id="accountContainer"
+        aria-label="Login and registration"
+    >
+
+        <!-- LOGIN FORM -->
+        <div class="form-container login-container">
+
+            <form
+                class="account-form login-form"
+                method="post"
+                action="{% url 'accounts:home' %}"
+            >
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    name="action"
+                    value="login"
+                >
+
+                <h1>Sign In</h1>
+
+                {% if login_error %}
+                    <p class="backend-message">
+                        {{ login_error }}
+                    </p>
+                {% endif %}
+
+                {% if messages %}
+                    {% for message in messages %}
+
+                        {% if message.tags == "success" %}
+
+                            <span
+                                id="registrationSuccessMessage"
+                                data-registration-success="true"
+                                hidden
+                            ></span>
+
+                        {% else %}
+
+                            <p class="backend-message">
+                                {{ message }}
+                            </p>
+
+                        {% endif %}
+
+                    {% endfor %}
+                {% endif %}
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    autocomplete="email"
+                    aria-label="Email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    autocomplete="current-password"
+                    aria-label="Password"
+                    required
+                >
+
+                <a
+                    class="forgot-password"
+                    href="{% url 'accounts:forgot_password' %}"
+                >
+                    Forgot Password?
+                </a>
+
+                <button
+                    class="primary-button"
+                    type="submit"
+                >
+                    Sign In
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- REGISTER FORM -->
+        <div class="form-container register-container">
+
+            <form
+                class="account-form register-form"
+                method="post"
+                action="{% url 'accounts:home' %}"
+            >
+                {% csrf_token %}
+
+                <input
+                    type="hidden"
+                    name="action"
+                    value="register"
+                >
+
+                <h1>Create Account</h1>
+
+                {% if register_error %}
+                    <p class="backend-message">
+                        {{ register_error }}
+                    </p>
+                {% endif %}
+
+                {% if register_error_popup %}
+                    <span
+                        id="registrationErrorMessage"
+                        data-registration-error="true"
+                        data-error-message="{{ register_error_popup|escape }}"
+                        hidden
+                    ></span>
+                {% endif %}
+
+                <input
+                    type="text"
+                    name="first_name"
+                    placeholder="First Name"
+                    autocomplete="given-name"
+                    aria-label="First Name"
+                >
+
+                <input
+                    type="text"
+                    name="last_name"
+                    placeholder="Last Name"
+                    autocomplete="family-name"
+                    aria-label="Last Name"
+                >
+
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    autocomplete="email"
+                    aria-label="Email"
+                    required
+                >
+
+                <input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    autocomplete="new-password"
+                    aria-label="Password"
+                    required
+                >
+
+                <input
+                    type="password"
+                    name="confirm_password"
+                    placeholder="Confirm Password"
+                    autocomplete="new-password"
+                    aria-label="Confirm Password"
+                    required
+                >
+
+                <button
+                    class="primary-button register-submit"
+                    type="submit"
+                >
+                    Sign Up
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- MOVING CYAN PANEL -->
+        <div class="overlay-container">
+
+            <div class="overlay">
+
+                <!-- REGISTER MODE -->
+                <div class="overlay-panel overlay-left">
+
+                    <img
+                        class="brand-logo"
+                        src="{% static 'images/malabon_ahon_white.png' %}"
+                        alt="Malabon Ahon"
+                    >
+
+                    <div class="overlay-action">
+
+                        <p>
+                            Already have an account?
+                        </p>
+
+                        <button
+                            class="outline-button"
+                            id="signInButton"
+                            type="button"
+                        >
+                            Sign In
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN MODE -->
+                <div class="overlay-panel overlay-right">
+
+                    <img
+                        class="brand-logo"
+                        src="{% static 'images/malabon_ahon_white.png' %}"
+                        alt="Malabon Ahon"
+                    >
+
+                    <div class="overlay-action">
+
+                        <p>
+                            Don’t have an account yet?
+                        </p>
+
+                        <button
+                            class="outline-button"
+                            id="registerButton"
+                            type="button"
+                        >
+                            Sign Up
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- REGISTRATION RESULT POPUP -->
+<div
+    class="registration-success-overlay"
+    id="registrationSuccessOverlay"
+    hidden
+>
+
+    <section
+        class="registration-success-card"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Registration result"
+    >
+
+        <div
+            class="registration-success-icon"
+            id="registrationResultIcon"
+            aria-hidden="true"
+        >
+            <span
+                class="registration-checkmark"
+                id="registrationCheckmark"
+            ></span>
+            <span
+                class="registration-xmark"
+                id="registrationXmark"
+                hidden
+            ></span>
+        </div>
+
+        <p
+            class="registration-success-text"
+            id="registrationResultText"
+        >
+            Account successfully<br>
+            created!
+        </p>
+
+        <button
+            class="registration-continue-button"
+            id="registrationContinueButton"
+            type="button"
+        >
+            Continue
+        </button>
+
+    </section>
+
+</div>
+
+
+<script src="{% static 'js/logres.js' %}"></script>
+
+</body>
+</html>

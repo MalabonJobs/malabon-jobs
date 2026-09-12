@@ -1,0 +1,42 @@
+1. Back up your project first.
+
+2. Replace the files in your project with the files from this package.
+   Keep all your existing CSS, JavaScript, and image files.
+
+3. Make sure db.sqlite3 contains no important data. Because this project is
+   switching to a custom user model, delete the empty/development database:
+
+   PowerShell:
+       Remove-Item db.sqlite3
+
+4. From the folder containing manage.py, run:
+
+       python manage.py makemigrations accounts
+       python manage.py migrate
+       python manage.py createsuperuser
+       python manage.py runserver
+
+5. Open:
+       Frontend: http://127.0.0.1:8000/
+       Admin:    http://127.0.0.1:8000/admin/
+
+6. In Admin you will see:
+       Accounts > Users
+       Accounts > Authentication events
+       Accounts > Password reset OTPs
+
+   Users shows every registered account.
+   Authentication events shows registrations, successful logins, failed
+   logins, logouts, email verification, and password resets.
+
+7. For local email testing, no Gmail setup is required. Registration links
+   and OTP codes print in the terminal.
+
+8. For Gmail SMTP in PowerShell:
+
+       $env:GMAIL_ADDRESS="youraddress@gmail.com"
+       $env:GMAIL_APP_PASSWORD="your-google-app-password"
+       $env:DJANGO_SECRET_KEY="replace-with-a-long-random-secret"
+       python manage.py runserver
+
+   Use a Google App Password, not your ordinary Gmail password.

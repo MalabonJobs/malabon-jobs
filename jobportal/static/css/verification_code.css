@@ -1,0 +1,463 @@
+:root {
+    --cyan: #03abfd;
+    --cyan-hover: #0298e5;
+    --white: #ffffff;
+    --black: #111111;
+    --border: #4f4f4f;
+    --input-border: #9a9a9a;
+    --input-focus: #03abfd;
+    --link-blue: #03abfd;
+    --error: #b00020;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+    margin: 0;
+}
+
+body {
+    background: var(--white);
+    color: var(--black);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* =========================
+   PAGE
+========================= */
+
+.verification-page {
+    width: 100%;
+    min-height: 100vh;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 30px;
+}
+
+
+/* =========================
+   MAIN CARD
+========================= */
+
+.verification-card {
+    width: 820px;
+    height: 560px;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    overflow: hidden;
+
+    background: var(--white);
+
+    border: 1px solid var(--border);
+    border-radius: 0;
+    box-shadow: none;
+}
+
+
+/* =========================
+   LEFT PANEL
+========================= */
+
+.verification-brand-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cyan);
+}
+
+.verification-brand-logo {
+    width: 250px;
+    max-width: 68%;
+    height: auto;
+
+    display: block;
+    object-fit: contain;
+}
+
+
+/* =========================
+   RIGHT PANEL
+========================= */
+
+.verification-form-panel {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--white);
+
+    border-left: 1px solid var(--border);
+}
+
+.verification-content {
+    width: 290px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    transform: translateY(-12px);
+}
+
+
+/* =========================
+   ENVELOPE ICON
+========================= */
+
+.mail-circle {
+    width: 165px;
+    height: 165px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: var(--cyan);
+    border-radius: 50%;
+
+    margin-bottom: 24px;
+}
+
+.mail-icon {
+    position: relative;
+
+    width: 92px;
+    height: 62px;
+
+    overflow: hidden;
+
+    background: var(--white);
+    border-radius: 6px;
+}
+
+.mail-icon::before,
+.mail-icon::after {
+    content: "";
+
+    position: absolute;
+    top: -25px;
+
+    width: 66px;
+    height: 66px;
+
+    border-bottom: 7px solid var(--cyan);
+}
+
+.mail-icon::before {
+    left: -4px;
+
+    transform: rotate(45deg);
+}
+
+.mail-icon::after {
+    right: -4px;
+
+    transform: rotate(-45deg);
+}
+
+
+/* =========================
+   MESSAGE
+========================= */
+
+.verification-message {
+    margin: 18px 0 0;
+
+    color: var(--black);
+
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    text-align: center;
+}
+
+.verification-email {
+    min-height: 18px;
+
+    margin: 7px 0 0;
+
+    color: var(--black);
+
+    font-size: 13px;
+    line-height: 1.2;
+
+    text-align: center;
+}
+
+
+/* =========================
+   ERROR MESSAGE
+========================= */
+
+.backend-message {
+    width: 100%;
+
+    margin: 8px 0 0;
+
+    color: var(--error);
+
+    font-size: 12px;
+    line-height: 1.2;
+
+    text-align: center;
+}
+
+
+/* =========================
+   FORM
+========================= */
+
+.verification-form {
+    width: 100%;
+
+    margin-top: 54px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+/* =========================
+   OTP INPUT BOXES
+========================= */
+
+.code-inputs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    gap: 10px;
+}
+
+.code-input {
+    width: 42px;
+    height: 48px;
+
+    padding: 0;
+
+    background: var(--white);
+    color: var(--black);
+
+    border: 1.5px solid var(--input-border);
+    border-radius: 6px;
+    outline: none;
+
+    font-size: 21px;
+    font-weight: 400;
+    line-height: 1;
+
+    text-align: center;
+
+    caret-color: var(--input-focus);
+
+    transition:
+        border-color 0.15s ease,
+        box-shadow 0.15s ease;
+}
+
+.code-input:hover {
+    border-color: #777777;
+}
+
+.code-input:focus {
+    border-color: var(--input-focus);
+
+    box-shadow:
+        0 0 0 1px var(--input-focus);
+}
+
+
+/* =========================
+   RESEND CODE TEXT BUTTON
+========================= */
+
+.resend-code {
+    appearance: none;
+    -webkit-appearance: none;
+
+    display: inline-block;
+
+    margin: 15px 0 0;
+    padding: 0;
+
+    background: transparent;
+    color: var(--link-blue);
+
+    border: 0;
+    border-radius: 0;
+    outline: none;
+    box-shadow: none;
+
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.2;
+
+    text-align: center;
+    text-decoration: none;
+}
+
+.resend-code:hover {
+    color: var(--cyan-hover);
+    text-decoration: underline;
+}
+
+.resend-code:focus-visible {
+    text-decoration: underline;
+
+    outline: 1px solid var(--link-blue);
+    outline-offset: 3px;
+}
+
+
+/* =========================
+   SEND BUTTON
+========================= */
+
+.verification-send-button {
+    width: 205px;
+    height: 48px;
+
+    margin-top: 24px;
+    padding: 0;
+
+    background: var(--cyan);
+    color: var(--white);
+
+    border: 1px solid var(--border);
+    border-radius: 0;
+
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.verification-send-button:hover {
+    background: var(--cyan-hover);
+}
+
+
+/* =========================
+   TABLET
+========================= */
+
+@media (max-width: 880px) {
+
+    .verification-card {
+        width: min(820px, 94vw);
+    }
+
+    .verification-brand-logo {
+        width: min(250px, 68%);
+    }
+
+    .verification-content {
+        width: min(290px, calc(100% - 40px));
+    }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 650px) {
+
+    .verification-page {
+        padding: 15px;
+    }
+
+    .verification-card {
+        width: min(430px, 100%);
+        height: auto;
+
+        grid-template-columns: 1fr;
+    }
+
+    .verification-brand-panel {
+        min-height: 250px;
+    }
+
+    .verification-brand-logo {
+        width: 220px;
+        max-width: 62%;
+    }
+
+    .verification-form-panel {
+        min-height: 500px;
+
+        border-left: 0;
+        border-top: 1px solid var(--border);
+    }
+
+    .verification-content {
+        width: calc(100% - 50px);
+        max-width: 300px;
+
+        transform: none;
+    }
+
+    .mail-circle {
+        width: 135px;
+        height: 135px;
+    }
+
+    .mail-icon {
+        width: 76px;
+        height: 50px;
+    }
+
+    .mail-icon::before,
+    .mail-icon::after {
+        top: -22px;
+
+        width: 56px;
+        height: 56px;
+
+        border-bottom-width: 6px;
+    }
+
+    .verification-message {
+        font-size: 15px;
+    }
+
+    .verification-form {
+        margin-top: 42px;
+    }
+
+    .code-inputs {
+        gap: 9px;
+    }
+
+    .code-input {
+        width: 40px;
+        height: 47px;
+    }
+
+    .verification-send-button {
+        width: 190px;
+    }
+
+}
