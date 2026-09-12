@@ -1,6 +1,8 @@
 import os
 from pathlib import Path
 
+import dj_database_url
+
 
 BASE_DIR = (
     Path(__file__)
@@ -40,6 +42,28 @@ ALLOWED_HOSTS = [
 
 
 # =========================================================
+# RENDER HOSTNAME
+# =========================================================
+
+RENDER_EXTERNAL_HOSTNAME = os.environ.get(
+    "RENDER_EXTERNAL_HOSTNAME"
+)
+
+if RENDER_EXTERNAL_HOSTNAME:
+    if RENDER_EXTERNAL_HOSTNAME not in ALLOWED_HOSTS:
+        ALLOWED_HOSTS.append(
+            RENDER_EXTERNAL_HOSTNAME
+        )
+
+    CSRF_TRUSTED_ORIGINS = [
+        f"https://{RENDER_EXTERNAL_HOSTNAME}"
+    ]
+
+else:
+    CSRF_TRUSTED_ORIGINS = []
+
+
+# =========================================================
 # APPLICATIONS
 # =========================================================
 
@@ -67,6 +91,8 @@ MIDDLEWARE = [
         "django.middleware.security."
         "SecurityMiddleware"
     ),
+
+    "whitenoise.middleware.WhiteNoiseMiddleware",
 
     (
         "django.contrib.sessions."
@@ -194,6 +220,23 @@ DATABASES = {
 
 
 # =========================================================
+# RENDER POSTGRESQL DATABASE
+# =========================================================
+
+DATABASE_URL = os.environ.get(
+    "DATABASE_URL"
+)
+
+if DATABASE_URL:
+
+    DATABASES["default"] = dj_database_url.parse(
+        DATABASE_URL,
+        conn_max_age=600,
+        ssl_require=True,
+    )
+
+
+# =========================================================
 # CUSTOM USER
 # =========================================================
 
@@ -274,6 +317,30 @@ STATICFILES_DIRS = [
     / "static"
 
 ]
+
+STATIC_ROOT = (
+    BASE_DIR
+    / "staticfiles"
+)
+
+
+STORAGES = {
+
+    "default": {
+        "BACKEND": (
+            "django.core.files.storage."
+            "FileSystemStorage"
+        ),
+    },
+
+    "staticfiles": {
+        "BACKEND": (
+            "whitenoise.storage."
+            "CompressedManifestStaticFilesStorage"
+        ),
+    },
+
+}
 
 
 # =========================================================
