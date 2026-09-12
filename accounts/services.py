@@ -54,7 +54,6 @@ def create_password_reset_otp(user):
 def _send_resend_email(subject, body, recipient):
     """
     Send email through Resend's HTTPS API.
-    This avoids Render Free's SMTP port restriction.
     """
 
     api_key = settings.RESEND_API_KEY
